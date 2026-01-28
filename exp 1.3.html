@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Admin Dashboard</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg,#020617,#0f172a);
+      color: white;
+      transition: 0.3s;
+    }
+
+    body.light {
+      background: #f5f5f5;
+      color: #111;
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 40px;
+    }
+
+    .btn {
+      background: #1e293b;
+      padding: 10px 15px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    body.light .btn {
+      background: #ddd;
+    }
+
+    .container {
+      display: flex;
+      gap: 30px;
+      padding: 20px 40px;
+    }
+
+    .card {
+      background: rgba(255,255,255,0.08);
+      border-radius: 15px;
+      padding: 30px;
+      border: 1px solid rgba(255,255,255,0.15);
+    }
+
+    body.light .card {
+      background: white;
+    }
+
+    .nav {
+      width: 220px;
+      height: 360px;
+    }
+
+    .boxes {
+      display: flex;
+      gap: 20px;
+    }
+
+    .box {
+      width: 180px;
+      height: 120px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="topbar">
+    <h1>Admin Dashboard</h1>
+    <div class="btn" id="themeBtn" onclick="toggleTheme()">🌞 Light Mode</div>
+  </div>
+
+  <div class="container">
+    <div class="card nav">Navigation</div>
+
+    <div class="boxes">
+      <div class="card box">Analytics</div>
+      <div class="card box">Users</div>
+      <div class="card box">Settings</div>
+    </div>
+  </div>
+
+  <script>
+    function toggleTheme() {
+      document.body.classList.toggle("light");
+      const btn = document.getElementById("themeBtn");
+
+      btn.innerText = document.body.classList.contains("light")
+        ? "🌙 Dark Mode"
+        : "🌞 Light Mode";
+    }
+  </script>
+
+</body>
+</html>
