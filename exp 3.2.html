@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library Management System</title>
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { background-color: #f8fafc; font-family: sans-serif; }
+        .card { transition: all 0.2s; }
+        .card:hover { transform: translateY(-2px); box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1); }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState } = React;
+
+        function LibraryApp() {
+            // Initial State
+            const [books, setBooks] = useState([
+                { id: 1, title: "The Great Gatsby", author: "S. Scott Fitzgerald" },
+                { id: 2, title: "To Kill a Mockingbird", author: "Harper Lee" }
+            ]);
+            
+            const [searchTerm, setSearchTerm] = useState("");
+            const [newTitle, setNewTitle] = useState("");
+            const [newAuthor, setNewAuthor] = useState("");
+
+            // Add Book Logic
+            const addBook = (e) => {
+                e.preventDefault();
+                if (!newTitle || !newAuthor) return;
+                const newBook = {
+                    id: Date.now(),
+                    title: newTitle,
+                    author: newAuthor
+                };
+                setBooks([...books, newBook]);
+                setNewTitle("");
+                setNewAuthor("");
+            };
+
+            // Remove Book Logic
+            const removeBook = (id) => {
+                setBooks(books.filter(book => book.id !== id));
+            };
+
+            // Filter Logic
+            const filteredBooks = books.filter(book =>
+                book.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                book.author.toLowerCase().includes(searchTerm.toLowerCase())
+            );
+
+            return (
+                <div className="max-w-xl mx-auto p-6">
+                    <h1 className="text-4xl font-bold text-center text-slate-800 mb-8">
+                        Library Management <br/> System
+                    </h1>
+
+                    {/* Search and Add Form */}
+                    <div className="bg-white p-4 rounded-xl border border-slate-200 mb-6 shadow-sm">
+                        <input 
+                            type="text" 
+                            placeholder="Search books..." 
+                            className="w-full p-2 mb-4 border border-slate-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            value={searchTerm}
+                            onChange={(e) => setSearchTerm(e.target.value)}
+                        />
+                        
+                        <form onSubmit={addBook} className="flex gap-2">
+                            <input 
+                                type="text" 
+                                placeholder="Book Title" 
+                                className="flex-1 p-2 border border-slate-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                value={newTitle}
+                                onChange={(e) => setNewTitle(e.target.value)}
+                            />
+                            <input 
+                                type="text" 
+                                placeholder="Author" 
+                                className="flex-1 p-2 border border-slate-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                value={newAuthor}
+                                onChange={(e) => setNewAuthor(e.target.value)}
+                            />
+                            <button 
+                                type="submit"
+                                className="bg-blue-600 text-white px-4 py-2 rounded-md font-semibold hover:bg-blue-700 transition"
+                            >
+                                Add Book
+                            </button>
+                        </form>
+                    </div>
+
+                    {/* Book List */}
+                    <div className="space-y-4">
+                        {filteredBooks.map(book => (
+                            <div key={book.id} className="card bg-white p-5 rounded-xl border border-slate-200 flex justify-between items-center shadow-sm">
+                                <div>
+                                    <h2 className="text-2xl font-bold text-slate-800">{book.title}</h2>
+                                    <p className="text-slate-500">by {book.author}</p>
+                                </div>
+                                <button 
+                                    onClick={() => removeBook(book.id)}
+                                    className="bg-red-500 text-white px-4 py-2 rounded-lg font-medium hover:bg-red-600 transition"
+                                >
+                                    Remove
+                                </button>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            );
+        }
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<LibraryApp />);
+    </script>
+</body>
+</html>

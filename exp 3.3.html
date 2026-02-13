@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 p-10">
+    <div id="root"></div>
+    <script type="text/babel">
+        // 1. Class Hierarchy (OOP)
+        class Person {
+            constructor(name, age) { Object.assign(this, { name, age, type: 'Person' }); }
+            introduce() { return `Hello, my name is ${this.name}.`; }
+        }
+
+        class Student extends Person {
+            constructor(name, age, major) { super(name, age); this.major = major; this.type = 'Student'; }
+            introduce() { return `${super.introduce()} and I'm studying ${this.major}.`; }
+        }
+
+        class Teacher extends Person {
+            constructor(name, age, subject) { super(name, age); this.subject = subject; this.type = 'Teacher'; }
+            introduce() { return `${super.introduce()} and I teach ${this.subject}.`; }
+        }
+
+        // 2. UI Component
+        const App = () => {
+            const data = [
+                new Person("Alex Johnson", 30),
+                new Student("Emma Watson", 20, "Computer Science"),
+                new Teacher("Dr. James Wilson", 45, "Mathematics")
+            ];
+
+            return (
+                <div className="max-w-md mx-auto">
+                    <h1 className="text-3xl font-bold mb-6 text-center">Person Class Hierarchy</h1>
+                    {data.map((p, i) => (
+                        <div key={i} className="bg-white p-5 rounded-lg border mb-4 shadow-sm">
+                            <h2 className="text-xl font-bold">{p.name} ({p.type})</h2>
+                            <p>Age: {p.age}</p>
+                            <p className="text-gray-500 italic my-2">{p.introduce()}</p>
+                            {p.major && <p className="font-semibold">Major: {p.major}</p>}
+                            {p.subject && <p className="font-semibold">Teaching: {p.subject}</p>}
+                        </div>
+                    ))}
+                </div>
+            );
+        };
+
+        ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+    </script>
+</body>
+</html>

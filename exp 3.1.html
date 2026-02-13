@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Product Cards</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: "Segoe UI", Tahoma, sans-serif;
+    }
+
+    body {
+      margin: 0;
+      padding: 40px;
+      background: linear-gradient(180deg, #f6f9fc, #eef3f8);
+    }
+
+    .container {
+      display: flex;
+      gap: 30px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .card {
+      background: #ffffff;
+      width: 260px;
+      border-radius: 16px;
+      padding: 20px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+      transition: transform 0.2s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+    }
+
+    .image-box {
+      height: 160px;
+      background: #f1f5f9;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 15px;
+    }
+
+    .image-box::after {
+      content: "";
+      width: 70px;
+      height: 70px;
+      background: linear-gradient(145deg, #dbe2ea, #cfd8e3);
+      border-radius: 12px;
+    }
+
+    .title {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .price {
+      font-size: 20px;
+      font-weight: bold;
+      margin-bottom: 12px;
+    }
+
+    .status {
+      display: inline-block;
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .in-stock {
+      background-color: #e6f8ee;
+      color: #2f855a;
+    }
+
+    .out-of-stock {
+      background-color: #fdecec;
+      color: #c53030;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+
+    <!-- Product Card 1 -->
+    <div class="card">
+      <div class="image-box"></div>
+      <div class="title">Wireless Headphones</div>
+      <div class="price">$129.99</div>
+      <span class="status in-stock">In Stock</span>
+    </div>
+
+    <!-- Product Card 2 -->
+    <div class="card">
+      <div class="image-box"></div>
+      <div class="title">Mechanical Keyboard</div>
+      <div class="price">$89.99</div>
+      <span class="status out-of-stock">Out of Stock</span>
+    </div>
+
+    <!-- Product Card 3 -->
+    <div class="card">
+      <div class="image-box"></div>
+      <div class="title">Smart Watch</div>
+      <div class="price">$199.99</div>
+      <span class="status in-stock">In Stock</span>
+    </div>
+
+  </div>
+
+</body>
+</html>
